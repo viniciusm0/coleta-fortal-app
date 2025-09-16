@@ -4,7 +4,6 @@ import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
 export default function App() {
       
   return (
-    <LoadingScreen/>
-    // <HomeScreen/>
+    <HomeScreen/>
   );
 }

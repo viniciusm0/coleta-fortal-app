@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Pressable} from "react-native";
 import MapRender from "../../components/MapRender";
+import { Styles } from "./HomeStyles"
+import { VoltarLoc } from '../../hooks/useReturnLocation'
 
 function HomeScreen() {
     return (

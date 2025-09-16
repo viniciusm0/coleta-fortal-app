@@ -7,26 +7,28 @@ export default function useLocation() {
     const [loading, setLoading] = useState<boolean>(true);
 
     const requestLocation = useCallback(async () => {
-    setLoading(true);
-    try {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-        setError('Permissão negada')
-        setLocation(null);
-        setLoading(false);
-        return
-    }
-    const loc = await Location.getCurrentPositionAsync({})
-    setLocation(loc);
-    } catch (e: any) {
-    setError(e?.message ?? "Erro ao obter localização");
-    } finally {
-    setLoading(false);
-    }
+        setLoading(true);
+
+        try {
+            const { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setError('Permissão negada')
+                setLocation(null);
+                setLoading(false);
+                return
+            }
+            const loc = await Location.getCurrentPositionAsync({})
+            setLocation(loc);
+
+        } catch (e: any) {
+            setError(e.message ?? "Erro ao obter localização");
+        } finally {
+            setLoading(false);
+        }
     }, []);
 
     useEffect(() => {
-    requestLocation();
+        requestLocation();
     }, [requestLocation]);
 
     return { location, error, loading, requestLocation, setLocation }
