@@ -1,10 +1,11 @@
 import {useState, useEffect, useCallback} from "react";
 import * as Location from 'expo-location';
+import { Region } from "react-native-maps";
 
-export default function useLocation() {
-    const [location, setLocation] = useState<Location.LocationObject | null>(null);
+export default function useInitialLocation() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [initialRegion, setInitialRegion] = useState<Region>({latitude: 0, longitude: 0, latitudeDelta: 0, longitudeDelta: 0})
 
     const requestLocation = useCallback(async () => {
         setLoading(true);
@@ -13,23 +14,26 @@ export default function useLocation() {
             const { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setError('Permissão negada')
-                setLocation(null);
                 setLoading(false);
                 return
             }
             const loc = await Location.getCurrentPositionAsync({})
-            setLocation(loc);
-
+                setInitialRegion({
+                    latitude: loc.coords.latitude,
+                    longitude: loc.coords.longitude,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01
+                })
         } catch (e: any) {
             setError(e.message ?? "Erro ao obter localização");
         } finally {
             setLoading(false);
         }
     }, []);
-
+    
     useEffect(() => {
         requestLocation();
     }, [requestLocation]);
 
-    return { location, error, loading, requestLocation, setLocation }
+    return { initialRegion, error, loading, requestLocation}
 }

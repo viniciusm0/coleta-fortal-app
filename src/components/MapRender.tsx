@@ -1,39 +1,20 @@
-import React, { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import MapView, {Marker, Circle} from 'react-native-maps';
-import useLocation from "../hooks/useLocation";
+import useInitialLocation from "../hooks/useInitialLocation";
 import WithoutLocationScreen from "../screens/Error/WithoutLocationScreen"
 import LoadingScreen from "../screens/Loading/LoadingScreen";
-import { Text, View, Pressable } from 'react-native';
+import { Text, Pressable } from 'react-native';
 import { Styles } from "../screens/Home/HomeStyles"
+import { useCoordsCircle } from '../hooks/useCoordsCircle'
 
 function MapRender() {
-    const { location, loading, error } = useLocation();
-    const mapRef = useRef(null)
-
-    const initialRegion = location ? {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-    } : {
-        latitude: 0,
-        longitude: 0,
-        latitudeDelta: 0,
-        longitudeDelta: 0,
-    }
-
-    const { latitude, longitude, latitudeDelta, longitudeDelta } = initialRegion
-
-    const targetRegion = {
-        latitude,
-        longitude,
-        latitudeDelta,
-        longitudeDelta
-    }
-
+    const { initialRegion, loading, error } = useInitialLocation();
+    const { circleCenter, getPositionPressed } = useCoordsCircle()
+    const mapRef = useRef<MapView | null>(null)
+    
     const animateMapToInitalRegion = () => {
         if (mapRef.current) {
-            mapRef.current.animateToRegion(targetRegion, 1000)
+            mapRef.current.animateToRegion(initialRegion, 1000)
         }
     }
 
@@ -46,6 +27,7 @@ function MapRender() {
                 ref={mapRef}
                 initialRegion={initialRegion}
                 style={{width: '100%', height: '100%', zIndex: -10, position: 'absolute'}}
+                onLongPress={getPositionPressed}
             >
             <Marker
                 key={1}
@@ -54,10 +36,7 @@ function MapRender() {
                 coordinate={{latitude: initialRegion.latitude, longitude: initialRegion.longitude}}
             />
             <Circle
-                center={{
-                    latitude: initialRegion.latitude,
-                    longitude: initialRegion.longitude,
-                }}
+                center={circleCenter}
                 radius={300}
                 fillColor='rgba(253, 48, 4,0.5)'
                 strokeColor='rgba(253, 48, 4,1)'
