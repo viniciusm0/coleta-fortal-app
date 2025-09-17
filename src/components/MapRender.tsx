@@ -20,8 +20,6 @@ function MapRender() {
 
     if (loading) return <LoadingScreen/>
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
-    console.log(initialRegion)
-    console.log(circleCenter)
     return (
         <>
             <MapView
