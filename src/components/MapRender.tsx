@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import MapView, {Marker, Circle} from 'react-native-maps';
 import useInitialLocation from "../hooks/useInitialLocation";
 import WithoutLocationScreen from "../screens/Error/WithoutLocationScreen"
@@ -9,7 +9,7 @@ import { useCoordsCircle } from '../hooks/useCoordsCircle'
 
 function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
-    const { circleCenter, getPositionPressed } = useCoordsCircle()
+    const { circleCenter, getPositionPressed } = useCoordsCircle();
     const mapRef = useRef<MapView | null>(null)
     
     const animateMapToInitalRegion = () => {
@@ -20,7 +20,8 @@ function MapRender() {
 
     if (loading) return <LoadingScreen/>
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
-
+    console.log(initialRegion)
+    console.log(circleCenter)
     return (
         <>
             <MapView
@@ -35,12 +36,14 @@ function MapRender() {
                 description="Esta é sua localização."
                 coordinate={{latitude: initialRegion.latitude, longitude: initialRegion.longitude}}
             />
-            <Circle
-                center={circleCenter}
-                radius={300}
-                fillColor='rgba(253, 48, 4,0.5)'
-                strokeColor='rgba(253, 48, 4,1)'
-            />
+            {circleCenter && (
+                <Circle
+                    center={circleCenter}
+                    radius={300}
+                    fillColor='rgba(253, 48, 4,0.5)'
+                    strokeColor='rgba(253, 48, 4,1)'
+                />
+            )}
             </MapView>  
             <Pressable 
                 style={Styles.container}

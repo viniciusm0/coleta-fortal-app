@@ -5,10 +5,16 @@ import useInitialLocation from './useInitialLocation'
 type MapEventLike = { nativeEvent: {coordinate: LatLng}}
 
 export const useCoordsCircle = () => {
-    const { initialRegion } = useInitialLocation()
+    const { initialRegion, loading } = useInitialLocation()
     const { latitude, longitude } = initialRegion
-    const [circleCenter, setCircleCenter] = useState<LatLng>({latitude, longitude})
+    const [circleCenter, setCircleCenter] = useState<LatLng | null>(null)
 
+    useEffect(() => {
+        if (!loading && initialRegion && (latitude !== 0 || longitude !== 0)) {
+            setCircleCenter({ latitude: latitude, longitude: longitude })
+        }
+    }, [loading, initialRegion])
+    
     const getPositionPressed = useCallback((event: MapEventLike) => {
         setCircleCenter(event.nativeEvent.coordinate)
     }, [])
