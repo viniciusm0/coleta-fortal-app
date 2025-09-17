@@ -6,10 +6,11 @@ import LoadingScreen from "../screens/Loading/LoadingScreen";
 import { Text, Pressable } from 'react-native';
 import { Styles } from "../screens/Home/HomeStyles"
 import { useCoordsCircle } from '../hooks/useCoordsCircle'
+import MarkersCircle from '../components/MarkersCircle'
 
 function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
-    const { circleCenter, getPositionPressed } = useCoordsCircle();
+    const { circleCenter, renderCircleOnPress } = useCoordsCircle();
     const mapRef = useRef<MapView | null>(null)
     
     const animateMapToInitalRegion = () => {
@@ -20,13 +21,14 @@ function MapRender() {
 
     if (loading) return <LoadingScreen/>
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
+    console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
         <>
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
                 style={{width: '100%', height: '100%', zIndex: -10, position: 'absolute'}}
-                onLongPress={getPositionPressed}
+                onLongPress={renderCircleOnPress}
             >
             <Marker
                 key={1}
@@ -42,6 +44,7 @@ function MapRender() {
                     strokeColor='rgba(253, 48, 4,1)'
                 />
             )}
+            <MarkersCircle circleCenter={circleCenter} circleRadius={300} />
             </MapView>  
             <Pressable 
                 style={Styles.container}

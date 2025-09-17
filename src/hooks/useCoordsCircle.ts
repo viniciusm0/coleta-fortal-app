@@ -14,11 +14,12 @@ export const useCoordsCircle = () => {
             setCircleCenter({ latitude: latitude, longitude: longitude })
         }
     }, [loading, initialRegion])
-    
-    const getPositionPressed = useCallback((event: MapEventLike) => {
+
+    const renderCircleOnPress = useCallback((event: MapEventLike) => {
+        console.log("Localização pressionada / latitude: " + event.nativeEvent.coordinate.latitude + ", longitude: " + event.nativeEvent.coordinate.longitude)
         setCircleCenter(event.nativeEvent.coordinate)
     }, [])
 
-    return { circleCenter, getPositionPressed, setCircleCenter}
+    return { circleCenter, renderCircleOnPress, setCircleCenter}
 }
 
