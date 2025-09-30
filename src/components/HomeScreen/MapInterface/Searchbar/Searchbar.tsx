@@ -20,12 +20,12 @@ export default function SearchBar() {
                 placeholder="Pesquise um ponto de coleta"
                 onChangeText={handleTextChange}
             />
-                <Icon
-                    iconStyle={Styles.iconSearch}
-                    name="search"
-                    color="white"
-                    onPress={() => handleInputValue(textInput)}
-                />
+            <Icon
+                iconStyle={Styles.iconSearch}
+                name="search"
+                color="white"
+                onPress={() => handleInputValue(textInput)}
+            />
         </View>
     )
 

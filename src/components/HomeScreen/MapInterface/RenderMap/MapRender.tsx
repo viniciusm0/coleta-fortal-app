@@ -1,11 +1,12 @@
+import MarkersCircle from '@/src/components/HomeScreen/MapInterface/RenderMap/MarkersCircle';
+import ReturnBackButton from '@/src/components/HomeScreen/MapInterface/ReturnBackButton/ReturnBackButton';
+import SearchBar from "@/src/components/HomeScreen/MapInterface/Searchbar/Searchbar";
+import { useCoordsCircle } from '@/src/hooks/useCoordsCircle';
+import useInitialLocation from "@/src/hooks/useInitialLocation";
+import useMapRef from '@/src/hooks/useMapRef';
+import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
+import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
 import MapView, { Circle, Marker } from 'react-native-maps';
-import MarkersCircle from '../components/MarkersCircle';
-import ReturnBackButton from '../components/ReturnBackButton/ReturnBackButton';
-import { useCoordsCircle } from '../hooks/useCoordsCircle';
-import useInitialLocation from "../hooks/useInitialLocation";
-import useMapRef from '../hooks/useMapRef';
-import WithoutLocationScreen from "../screens/Error/WithoutLocationScreen";
-import LoadingScreen from "../screens/Loading/LoadingScreen";
 
 export default function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
@@ -15,11 +16,12 @@ export default function MapRender() {
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
-        <>
+        <>  
+            <SearchBar/>
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
-                style={{width: '100%', height: '100%', zIndex: -10, position: 'absolute'}}
+                style={{width: '100%', height: '91%', zIndex: -10, position: 'absolute'}}
                 onLongPress={renderCircleOnPress}
             >
                 <Marker
@@ -38,7 +40,6 @@ export default function MapRender() {
                 )}
                 <MarkersCircle circleCenter={circleCenter} circleRadius={300} />
             </MapView>
-
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
         </>  
     )
