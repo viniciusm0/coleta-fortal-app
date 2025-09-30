@@ -1,12 +1,11 @@
-import MapView, {Marker, Circle} from 'react-native-maps';
+import MapView, { Circle, Marker } from 'react-native-maps';
+import MarkersCircle from '../components/MarkersCircle';
+import ReturnBackButton from '../components/ReturnBackButton/ReturnBackButton';
+import { useCoordsCircle } from '../hooks/useCoordsCircle';
 import useInitialLocation from "../hooks/useInitialLocation";
-import WithoutLocationScreen from "../screens/Error/WithoutLocationScreen"
-import LoadingScreen from "../screens/Loading/LoadingScreen";
-import { useCoordsCircle } from '../hooks/useCoordsCircle'
-import MarkersCircle from '../components/MarkersCircle'
-import ReturnBackButton from '../components/ReturnBackButton/ReturnBackButton'
 import useMapRef from '../hooks/useMapRef';
-
+import WithoutLocationScreen from "../screens/Error/WithoutLocationScreen";
+import LoadingScreen from "../screens/Loading/LoadingScreen";
 
 export default function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
