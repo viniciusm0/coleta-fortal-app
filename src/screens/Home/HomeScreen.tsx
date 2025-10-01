@@ -3,7 +3,7 @@ import MapRender from "../../components/HomeScreen/MapInterface/RenderMap/MapRen
 
 function HomeScreen() {
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, height: "100%"}}>
             <MapRender/>
         </View>
     ) 

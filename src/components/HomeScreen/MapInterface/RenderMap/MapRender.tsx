@@ -1,3 +1,4 @@
+import FilterButtons from '@/src/components/HomeScreen/MapInterface/FilterButtons/FilterButtons';
 import MarkersCircle from '@/src/components/HomeScreen/MapInterface/RenderMap/MarkersCircle';
 import ReturnBackButton from '@/src/components/HomeScreen/MapInterface/ReturnBackButton/ReturnBackButton';
 import SearchBar from "@/src/components/HomeScreen/MapInterface/Searchbar/Searchbar";
@@ -6,6 +7,7 @@ import useInitialLocation from "@/src/hooks/useInitialLocation";
 import useMapRef from '@/src/hooks/useMapRef';
 import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
 import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
+import { View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
 export default function MapRender() {
@@ -16,8 +18,9 @@ export default function MapRender() {
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
-        <>  
+        <View style={{display: 'flex', flexDirection: "column", height: "100%", borderColor: "red", borderWidth: 1}}>  
             <SearchBar/>
+            <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
@@ -40,7 +43,7 @@ export default function MapRender() {
                 )}
                 <MarkersCircle circleCenter={circleCenter} circleRadius={300} />
             </MapView>
-            <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
-        </>  
+            <FilterButtons/>
+        </View>  
     )
 }
