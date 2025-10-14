@@ -1,6 +1,5 @@
-import { jsonPontosDeColeta } from '@/src/backend/JSONS';
+import { jsonTodos } from '@/src/backend/JSONTODOS';
 import { getDistance } from 'geolib';
-import { Text, View } from "react-native";
 import { Marker } from "react-native-maps";
 
 export default function MarkersCircle(props : any) {
@@ -27,33 +26,56 @@ export default function MarkersCircle(props : any) {
     //     }
     // })
 
-    // const MarkersJson = jsonCentroRecTec.features
-    const MarkersJson = jsonPontosDeColeta.features
-
-
+    const MarkersJson = jsonTodos.features
     return MarkersJson.map((marker) => {
+        const id = marker.id.replace(/\W/g, " ").split(" ")[0].replace("vw_", "")
         const coordinate = {
             latitude: marker.geometry.coordinates[1],
             longitude: marker.geometry.coordinates[0]
         }
         const distance = getDistance(coordinate, circleCenter)
+        let descricaoTipo;
+        
+        switch(id){
+            case "Biodigestores":
+                descricaoTipo = "Bio digestor"
+                break
 
+            case "CentroRecondicionamentoTecnologico":
+                descricaoTipo = "Centro de Recondicionamento Tecnolôgico"
+                break
+
+            case "Ecopontos":
+                descricaoTipo = "Eco Ponto"
+                break
+
+            case "IlhasEcologicas":
+                descricaoTipo = "Ilha Ecologica"
+                break
+
+            case "LixeirasSubterraneas":
+                descricaoTipo = "Lixeira Subterrânea"
+                break
+
+            case "ColetaDomiciliarPontos":
+                descricaoTipo = "Ponto de coleta domiciliar"
+                break
+
+            case "maquinas_reciclagem":
+                descricaoTipo = "Máquina de reciclagem"
+                break
+
+        }
         if(distance <= circleRadius) {
             return (
                 <Marker
                     key={marker.id}
-                    title={marker.properties.Nome}
-                    description={`${marker.properties.Descrição}`}
+                    title={marker.properties.Nome ? marker.properties.Nome : marker.properties.nome}
+                    description={`${descricaoTipo}`}
                     coordinate={coordinate}
                     pinColor={"aqua"}
-                >
-                    <View>
-                        <Text>Testando</Text>
-                    </View>
-                </Marker>
+                />
             )
         }
     })
-  
-    
 }

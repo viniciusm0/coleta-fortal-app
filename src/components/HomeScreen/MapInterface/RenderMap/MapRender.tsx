@@ -36,12 +36,12 @@ export default function MapRender() {
                 {circleCenter && (
                     <Circle
                         center={circleCenter}
-                        radius={300}
+                        radius={500}
                         fillColor='rgba(253, 48, 4,0.5)'
                         strokeColor='rgba(253, 48, 4,1)'
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={300}/>
+                <MarkersCircle circleCenter={circleCenter} circleRadius={500}/>
             </MapView>
             <FilterButtons/>
         </View>  

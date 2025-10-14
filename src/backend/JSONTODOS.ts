@@ -1,4 +1,4 @@
-const jsonBioDigestores = {
+const jsonTodos = {
     "type": "FeatureCollection",
     "features": [
         {
@@ -2100,24 +2100,7 @@ const jsonBioDigestores = {
                 "SCR da camada": "EPSG:4326 - WGS 84",
                 "Codificação": "UTF-8"
             }
-        }
-    ],
-    "totalFeatures": 84,
-    "numberMatched": 84,
-    "numberReturned": 84,
-    "timeStamp": "2025-08-14T01:26:23.375Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonCentroRecTec = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_CentroRecondicionamentoTecnologico.fid-4771eb0b_198a626cc29_-67b6",
             "geometry": {
@@ -2172,24 +2155,7 @@ const jsonCentroRecTec = {
                 "epsg_codif": "EPSG: 31984 (SIRGAS 2000 - UTM 24S); Codificação: UTF-8",
                 "Fonte": "Catálogo de Serviços PMF, gerreferenciado por IPLANFOR."
             }
-        }
-    ],
-    "totalFeatures": 2,
-    "numberMatched": 2,
-    "numberReturned": 2,
-    "timeStamp": "2025-08-14T01:26:20.025Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonEcoPontos = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_Ecopontos.fid-4771eb0b_198a626cc29_-681f",
             "geometry": {
@@ -5758,24 +5724,7 @@ const jsonEcoPontos = {
                 "SRC da camada": "EPSG:4326 - WGS 84",
                 "Codificação": "UTF-8"
             }
-        }
-    ],
-    "totalFeatures": 105,
-    "numberMatched": 105,
-    "numberReturned": 105,
-    "timeStamp": "2025-08-14T01:26:14.888Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonIlhasEco = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_IlhasEcologicas.fid-4771eb0b_198a626cc29_-6877",
             "geometry": {
@@ -8062,24 +8011,7 @@ const jsonIlhasEco = {
                 "SRC da camada": "SIRGAS 2000 / UTM zone 24S",
                 "Codificação": "UTF-8"
             }
-        }
-    ],
-    "totalFeatures": 88,
-    "numberMatched": 88,
-    "numberReturned": 88,
-    "timeStamp": "2025-08-14T01:26:10.628Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonLixeirasSub = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_LixeirasSubterraneas.fid-4771eb0b_198a626cc29_-6b89",
             "geometry": {
@@ -9441,24 +9373,7 @@ const jsonLixeirasSub = {
                 "SRC da camada": "EPSG:4326 - WGS 84",
                 "Codificação": "UTF-8"
             }
-        }
-    ],
-    "totalFeatures": 47,
-    "numberMatched": 47,
-    "numberReturned": 47,
-    "timeStamp": "2025-08-14T01:25:41.246Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonPontosDeColeta = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_ColetaDomiciliarPontos.fid-4771eb0b_198a626cc29_-6aad",
             "geometry": {
@@ -23282,24 +23197,7 @@ const jsonPontosDeColeta = {
                 "SRC da camada": "EPSG:4326 - WGS 84",
                 "Codificação": "UTF-8"
             }
-        }
-    ],
-    "totalFeatures": 553,
-    "numberMatched": 553,
-    "numberReturned": 553,
-    "timeStamp": "2025-08-14T01:25:59.001Z",
-    "crs": {
-        "type": "name",
-        "properties": {
-            "name": "urn:ogc:def:crs:EPSG::4326"
-        }
-    }
-}
-
-const jsonRetornaMachine = {
-    "type": "FeatureCollection",
-    "features": [
-        {
+        }, {
             "type": "Feature",
             "id": "vw_maquinas_reciclagem.fid-4771eb0b_198a626cc29_-6884",
             "geometry": {
@@ -23638,10 +23536,10 @@ const jsonRetornaMachine = {
             }
         }
     ],
-    "totalFeatures": 13,
-    "numberMatched": 13,
-    "numberReturned": 13,
-    "timeStamp": "2025-08-14T01:26:02.497Z",
+    "totalFeatures": 84,
+    "numberMatched": 84,
+    "numberReturned": 84,
+    "timeStamp": "2025-08-14T01:26:23.375Z",
     "crs": {
         "type": "name",
         "properties": {
@@ -23650,5 +23548,5 @@ const jsonRetornaMachine = {
     }
 }
 
-export { jsonBioDigestores, jsonCentroRecTec, jsonEcoPontos, jsonIlhasEco, jsonLixeirasSub, jsonPontosDeColeta, jsonRetornaMachine }
+export { jsonTodos }
 
