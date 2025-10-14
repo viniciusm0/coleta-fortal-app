@@ -41,7 +41,7 @@ export default function MapRender() {
                         strokeColor='rgba(253, 48, 4,1)'
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={300} />
+                <MarkersCircle circleCenter={circleCenter} circleRadius={300}/>
             </MapView>
             <FilterButtons/>
         </View>  
