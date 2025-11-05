@@ -28,6 +28,8 @@ export default function MapRender() {
                 onLongPress={renderCircleOnPress}
             >
                 <Marker
+                    //pinColor='#3399ff'
+                    image={require('@/assets/images/user1.png')}
                     key={1}
                     title="Sua localização"
                     description="Esta é sua localização."
@@ -37,8 +39,9 @@ export default function MapRender() {
                     <Circle
                         center={circleCenter}
                         radius={300}
-                        fillColor='rgba(253, 48, 4,0.5)'
-                        strokeColor='rgba(253, 48, 4,1)'
+                        fillColor='rgba(226, 231, 236, 0.2)'
+                        strokeColor='rgba(74, 144, 226, 0.3)'
+                        strokeWidth={25}
                     />
                 )}
                 <MarkersCircle circleCenter={circleCenter} circleRadius={300} />

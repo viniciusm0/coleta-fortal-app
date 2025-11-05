@@ -1,5 +1,6 @@
-import { Stack } from "expo-router";
+import DrawerRoutes from "@/src/components/Routes/Drawer.routes";
+
 
 export default function RootLayout() {
-  return <Stack />
+  return <DrawerRoutes />;
 }
