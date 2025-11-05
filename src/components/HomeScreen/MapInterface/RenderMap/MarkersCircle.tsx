@@ -27,7 +27,7 @@ export default function MarkersCircle(props : any) {
             case "Biodigestores":
                 descricaoTipo = "Bio digestor"
                 break
-
+                
             case "CentroRecondicionamentoTecnologico":
                 descricaoTipo = "Centro de Recondicionamento Tecnolôgico"
                 break
