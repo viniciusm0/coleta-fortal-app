@@ -24,9 +24,6 @@ export default function MapRender() {
             const endereco = marker.properties.Endereço
             const bairro = marker.properties.Bairro
             console.log(marker.properties)
-            console.log(nome)
-            console.log(endereco)
-            console.log(bairro)
             setMarkerInfo({
                 nome: nome,
                 endereco: endereco,
@@ -64,7 +61,7 @@ export default function MapRender() {
                         strokeColor='rgba(253, 48, 4,1)'
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={500} markerInfo={handleMarkerInfo}/>
+                <MarkersCircle circleCenter={circleCenter} circleRadius={500} markerInfo={handleMarkerInfo} mapRef={mapRef}/>
             </MapView>
             {markerInfo != null ? <RenderInfosMarker MarkerInfo={markerInfo}/> : <></>}
             <FilterButtons/>

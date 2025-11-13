@@ -6,6 +6,7 @@ export default function MarkersCircle(props : any) {
     const circleCenter= props.circleCenter
     const circleRadius = props.circleRadius
     const setMarkerInfo = props.markerInfo
+    const mapRef = props.mapRef
     // const Markers = [
     //     {id: '2', coordinate: { latitude: -3.7910, longitude: -38.6060}, title: 'Marcador 1', description: 'Este é o marcador 1'},
     //     {id: '3', coordinate: { latitude: -3.7960, longitude: -38.6089}, title: 'Marcador 2', description: 'Este é o marcador 2'},
@@ -76,12 +77,12 @@ export default function MarkersCircle(props : any) {
                     coordinate={coordinate}
                     pinColor={"aqua"}
                     onSelect={() => {
-                        console.log("No markerCircle")
-                        console.log(marker.properties.Nome)
                         setMarkerInfo(marker)
+                        mapRef.current.animateToRegion({...coordinate, latitudeDelta: 0.001, longitudeDelta: 0.001}, 1000)
                     }}
                     onDeselect={() =>  {
                         setMarkerInfo(null)
+                        mapRef.current.animateToRegion({...coordinate, latitudeDelta: 0.01, longitudeDelta: 0.01}, 1000)
                     }}
                 />
             )
