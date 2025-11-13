@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fortal-lixo-app",
-    "slug": "fortal-lixo-app",
+    "name": "coleta-fortal",
+    "slug": "coleta-fortal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.jpg",
