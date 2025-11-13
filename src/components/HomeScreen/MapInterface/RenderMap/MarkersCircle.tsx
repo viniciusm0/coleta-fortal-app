@@ -5,6 +5,7 @@ import { Marker } from "react-native-maps";
 export default function MarkersCircle(props : any) {
     const circleCenter= props.circleCenter
     const circleRadius = props.circleRadius
+    const setMarkerInfo = props.markerInfo
     // const Markers = [
     //     {id: '2', coordinate: { latitude: -3.7910, longitude: -38.6060}, title: 'Marcador 1', description: 'Este é o marcador 1'},
     //     {id: '3', coordinate: { latitude: -3.7960, longitude: -38.6089}, title: 'Marcador 2', description: 'Este é o marcador 2'},
@@ -74,6 +75,14 @@ export default function MarkersCircle(props : any) {
                     description={`${descricaoTipo}`}
                     coordinate={coordinate}
                     pinColor={"aqua"}
+                    onSelect={() => {
+                        console.log("No markerCircle")
+                        console.log(marker.properties.Nome)
+                        setMarkerInfo(marker)
+                    }}
+                    onDeselect={() =>  {
+                        setMarkerInfo(null)
+                    }}
                 />
             )
         }
