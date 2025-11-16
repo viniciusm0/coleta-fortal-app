@@ -15,20 +15,12 @@ import MapView, { Circle, Marker } from 'react-native-maps';
 export default function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
     const { circleCenter, renderCircleOnPress } = useCoordsCircle();
-    const [markerInfo, setMarkerInfo] = useState<any>(null)
+    const [markerInfo, setMarkerInfo] = useState<{} | null>(null)
     const mapRef = useMapRef()
 
-    const handleMarkerInfo = (marker: any) => {
+    const handleMarkerInfo = (marker: {}) => {
         if (marker != null) {
-            const nome = marker.properties.Nome ? marker.properties.Nome : marker.properties.nome
-            const endereco = marker.properties.Endereço
-            const bairro = marker.properties.Bairro
-            console.log(marker.properties)
-            setMarkerInfo({
-                nome: nome,
-                endereco: endereco,
-                bairro: bairro
-            })
+            setMarkerInfo(marker)
         } else {
             setMarkerInfo(null)
         }
