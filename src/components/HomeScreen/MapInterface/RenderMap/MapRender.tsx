@@ -11,6 +11,7 @@ import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
 import { useState } from "react";
 import { View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
+import { Styles } from "./MapRenderStyles";
 
 export default function MapRender() {
     const { initialRegion, loading, error } = useInitialLocation();
@@ -30,13 +31,13 @@ export default function MapRender() {
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
-        <View style={{display: 'flex', flexDirection: "column", zIndex: -10, height: "100%", borderColor: "red", borderWidth: 1}}>  
+        <View style={Styles.containerMap}>  
             <SearchBar/>
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
-                style={{width: '100%', height: '91%', zIndex: -10, position: 'absolute'}}
+                style={Styles.mapViewStyle}
                 onLongPress={renderCircleOnPress}
             >
                 <Marker
