@@ -8,10 +8,11 @@ import useMapRef from '@/src/hooks/useMapRef';
 import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
 import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
-export default function MapRender() {
+export default function MapRender(props: any) {
+    const teste = props.radiusInfo
     const [radius, setRadius] = useState(300);
     const [showRadiusMenu, setShowRadiusMenu] = useState(false);
     const { initialRegion, loading, error } = useInitialLocation();
@@ -41,24 +42,24 @@ export default function MapRender() {
                 {circleCenter && (
                     <Circle
                         center={circleCenter}
-                        radius={radius}
+                        radius={teste}
                         fillColor='rgba(226, 231, 236, 0.2)'
                         strokeColor='rgba(74, 144, 226, 0.3)'
                         strokeWidth={25}
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={radius} />
+                <MarkersCircle circleCenter={circleCenter} circleRadius={teste} />
             </MapView>
             <View style={styles.radiusMenuWrapper}>
-    <Pressable
+    {/* <Pressable
         style={styles.radiusMainButton}
         onPress={() => setShowRadiusMenu(!showRadiusMenu)}
     >
         <Text style={styles.radiusMainButtonText}>Raio</Text>
-    </Pressable>
+    </Pressable> */}
 
 
-    {showRadiusMenu && (
+    {/* {showRadiusMenu && (
         <View style={styles.radiusMenu}>
             <Pressable style={styles.radiusOption} onPress={() => { setRadius(300); setShowRadiusMenu(false); }}>
                 <Text>300m</Text>
@@ -76,7 +77,7 @@ export default function MapRender() {
                 <Text>2 km</Text>
             </Pressable>
         </View>
-    )}
+    )} */}
 </View>
             <FilterButtons/>
         </View>  

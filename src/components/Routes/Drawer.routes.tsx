@@ -3,6 +3,7 @@ import FaleConosco from '@/src/screens/FaleConosco/FaleConosco';
 import Home from '@/src/screens/Home/HomeScreen';
 import Sobre from '@/src/screens/Sobre/Sobre';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useState } from "react";
 
 console.log("HomeScreen:", Home);
 console.log("ConfigScreen:", Configuracoes);
@@ -11,17 +12,19 @@ console.log("Sobre:", Sobre);
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerRoutes(){
+export default function DrawerRoutes(props: any){
+    const [radius, setRadius] = useState<number>(300)
+
     return(
         <Drawer.Navigator>
              <Drawer.Screen 
                 name="Home" 
-                component={Home}/>
-            
-            
+                component={() => <Home radiusInfo={radius}/>}
+            />
+
           <Drawer.Screen
                 name="Configurações"
-                component={Configuracoes}
+                component={() => <Configuracoes setRadiusFunction={setRadius}/>}
              />
 
              <Drawer.Screen
@@ -33,8 +36,7 @@ export default function DrawerRoutes(){
                  name="Sobre"
                 component={Sobre}
              />
-
-            
+ 
          </Drawer.Navigator>
      )
  }
