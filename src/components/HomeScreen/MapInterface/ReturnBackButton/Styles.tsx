@@ -14,5 +14,6 @@ export const Styles = StyleSheet.create({
         backgroundColor: "black",
         color: "white",
         fontSize: 16,
+        alignSelf: "flex-start"
     }
 })

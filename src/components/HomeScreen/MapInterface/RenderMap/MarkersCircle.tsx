@@ -3,7 +3,7 @@ import { getDistance } from 'geolib';
 import { Marker } from "react-native-maps";
 
 type infos = {
-    id: string,
+    id?: string,
     nome?: string,
     endereco?: string | null,
     bairro?: string,
@@ -40,7 +40,6 @@ export default function MarkersCircle(props : any) {
         const distance = getDistance(coordinate, circleCenter)
         let descricaoTipo: string = "";
         let infos: infos = {
-            id: descricaoTipo,
             nome: marker.properties.Nome ? marker.properties.Nome : marker.properties.nome,
             endereco: marker.properties.Endereço ? marker.properties.Endereço : marker.properties.endereço,
             bairro: marker.properties.Bairro ? marker.properties.Bairro : marker.properties.bairro,
@@ -82,6 +81,7 @@ export default function MarkersCircle(props : any) {
                 descricaoTipo = "Bio digestor"
                 infos = {
                     ...infos,
+                    id: descricaoTipo,
                     tipoInstituicao: marker.properties["Tipo de Instituição"]
                 }
                 break
@@ -90,6 +90,7 @@ export default function MarkersCircle(props : any) {
                 descricaoTipo = "Centro de Recondicionamento Tecnolôgico"
                 infos = {
                     ...infos,
+                    id: descricaoTipo,
                     funcionamento: marker.properties.Funcionamento,
                     horario: marker.properties.Horário,
                 }
@@ -99,6 +100,7 @@ export default function MarkersCircle(props : any) {
                 descricaoTipo = "Eco Ponto"
                 infos = {
                     ...infos,
+                    id: descricaoTipo,
                     situacao: marker.properties.Situação,
                     modalidade: marker.properties.Modalidade,
                     categoria: marker.properties.Categoria,
@@ -108,13 +110,17 @@ export default function MarkersCircle(props : any) {
 
             case "IlhasEcologicas":
                 descricaoTipo = "Ilha Ecologica"
-                infos = infos;
+                infos = {
+                    ...infos,
+                    id: descricaoTipo
+                };
                 break
 
             case "LixeirasSubterraneas":
                 descricaoTipo = "Lixeira Subterrânea"
                 infos = {
                     ...infos,
+                    id: descricaoTipo,
                     tipoDeColeta: marker.properties["Tipo de coleta"],
                     frequencia: marker.properties.Frequência,
                     capacidade: marker.properties["Capacidade (Litros)"],
@@ -137,7 +143,8 @@ export default function MarkersCircle(props : any) {
             case "maquinas_reciclagem":
                 descricaoTipo = "Máquina de reciclagem"
                 infos = {
-                    ...infos, 
+                    ...infos,
+                    id: descricaoTipo, 
                     funciona: marker.properties.funciona,
                     layer: marker.properties.layer
                 }

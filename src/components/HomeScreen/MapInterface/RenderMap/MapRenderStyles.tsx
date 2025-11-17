@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native"
 export const Styles = StyleSheet.create({
     containerMap: {
         display: 'flex', 
-        flexDirection: "column", 
+        flexDirection: "column",
+        alignItems: "center", 
         zIndex: -10, 
         height: "100%",
     },
