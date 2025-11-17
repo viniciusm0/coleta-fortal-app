@@ -20,36 +20,45 @@ export default function MarkersCircle(props : any) {
         }
         const distance = getDistance(coordinate, circleCenter)
         //Define uma variavel para armazenar a descrição do ponto
-        let descricaoTipo;
-        
-        //Analisa o id para saber qual será a descrição do ponto
+        let descricaoTipo= "";
+        let image: any = null;
+
+
+         //Analisa o id para saber qual será a descrição do ponto
         switch(id){
             case "Biodigestores":
                 descricaoTipo = "Bio digestor"
+                image= require('@/assets/images/Biodigestor (1).png')
                 break
                 
             case "CentroRecondicionamentoTecnologico":
                 descricaoTipo = "Centro de Recondicionamento Tecnolôgico"
+                image= require('@/assets/images/Centrotecnologico1.png')
                 break
 
             case "Ecopontos":
-                descricaoTipo = "Eco Ponto"
+                descricaoTipo = "Eco Ponto"  
+                image= require('@/assets/images/ecoponto.png')              
                 break
 
             case "IlhasEcologicas":
                 descricaoTipo = "Ilha Ecologica"
+                image= require('@/assets/images/IlhaEcologica (1).png')
                 break
 
             case "LixeirasSubterraneas":
                 descricaoTipo = "Lixeira Subterrânea"
+                image= require('@/assets/images/ecoponto.png')
                 break
 
             case "ColetaDomiciliarPontos":
                 descricaoTipo = "Ponto de coleta domiciliar"
+                image= require('@/assets/images/Coletadomiciliar (1).png')
                 break
 
             case "maquinas_reciclagem":
                 descricaoTipo = "Máquina de reciclagem"
+                image= require('@/assets/images/Reciclagemmaquina.png')
                 break
         }
         if(distance <= circleRadius) {
@@ -66,7 +75,7 @@ export default function MarkersCircle(props : any) {
                     title={marker.properties.Nome ? marker.properties.Nome : marker.properties.nome}
                     description={`${descricaoTipo}`}
                     coordinate={coordinate}
-                    pinColor={"aqua"}
+                   {...(image ? { image } : {})}
                 />
             )
         }

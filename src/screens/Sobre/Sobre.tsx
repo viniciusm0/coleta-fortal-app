@@ -1,12 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function feed(){
+export default function Sobre(){
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Ola vem conhecer nosso apk</Text>
-            <Text>Falando sobre o nosso aplicativo goostariamos de resaltar que  mesmo se concentra em ser 
-                um aplicativo voltado a coleta na nossa cidade de fortaleza.
-            </Text>
+            <Text style={styles.title}>Configurações</Text>
             
         </View>
     );

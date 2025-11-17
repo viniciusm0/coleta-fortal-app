@@ -1,34 +1,41 @@
+import Configuracoes from '@/src/screens/Configuracoes/Configuracoes';
+import FaleConosco from '@/src/screens/FaleConosco/FaleConosco';
+import Home from '@/src/screens/Home/HomeScreen';
+import Sobre from '@/src/screens/Sobre/Sobre';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-
-
-import Configurações from '@/src/screens/Configurações/Configurações';
-import Feed from '@/src/screens/feed/feed';
-import Home from '@/src/screens/Home/HomeScreen';
-
+console.log("HomeScreen:", Home);
+console.log("ConfigScreen:", Configuracoes);
+console.log("FaleConosco:", FaleConosco);
+console.log("Sobre:", Sobre);
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerRoutes(){
     return(
         <Drawer.Navigator>
-            <Drawer.Screen 
+             <Drawer.Screen 
                 name="Home" 
                 component={Home}/>
             
-            <Drawer.Screen
-                name="feed"
-                component={Feed}
-            />
-             <Drawer.Screen
+            
+          <Drawer.Screen
                 name="Configurações"
-                component={Configurações}
+                component={Configuracoes}
+             />
+
+             <Drawer.Screen
+                 name="Fale Conosco"
+                component={FaleConosco}
             />
+             
+             <Drawer.Screen
+                 name="Sobre"
+                component={Sobre}
+             />
 
             
-           
-
-        </Drawer.Navigator>
-    )
-}
+         </Drawer.Navigator>
+     )
+ }
 

@@ -7,10 +7,13 @@ import useInitialLocation from "@/src/hooks/useInitialLocation";
 import useMapRef from '@/src/hooks/useMapRef';
 import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
 import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
-import { View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
 export default function MapRender() {
+    const [radius, setRadius] = useState(300);
+    const [showRadiusMenu, setShowRadiusMenu] = useState(false);
     const { initialRegion, loading, error } = useInitialLocation();
     const { circleCenter, renderCircleOnPress } = useCoordsCircle();
     const mapRef = useMapRef()
@@ -38,15 +41,84 @@ export default function MapRender() {
                 {circleCenter && (
                     <Circle
                         center={circleCenter}
-                        radius={300}
+                        radius={radius}
                         fillColor='rgba(226, 231, 236, 0.2)'
                         strokeColor='rgba(74, 144, 226, 0.3)'
                         strokeWidth={25}
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={300} />
+                <MarkersCircle circleCenter={circleCenter} circleRadius={radius} />
             </MapView>
+            <View style={styles.radiusMenuWrapper}>
+    <Pressable
+        style={styles.radiusMainButton}
+        onPress={() => setShowRadiusMenu(!showRadiusMenu)}
+    >
+        <Text style={styles.radiusMainButtonText}>Raio</Text>
+    </Pressable>
+
+
+    {showRadiusMenu && (
+        <View style={styles.radiusMenu}>
+            <Pressable style={styles.radiusOption} onPress={() => { setRadius(300); setShowRadiusMenu(false); }}>
+                <Text>300m</Text>
+            </Pressable>
+
+            <Pressable style={styles.radiusOption} onPress={() => { setRadius(500); setShowRadiusMenu(false); }}>
+                <Text>500m</Text>
+            </Pressable>
+
+            <Pressable style={styles.radiusOption} onPress={() => { setRadius(1000); setShowRadiusMenu(false); }}>
+                <Text>1 km</Text>
+            </Pressable>
+
+            <Pressable style={styles.radiusOption} onPress={() => { setRadius(2000); setShowRadiusMenu(false); }}>
+                <Text>2 km</Text>
+            </Pressable>
+        </View>
+    )}
+</View>
             <FilterButtons/>
         </View>  
     )
 }
+
+const styles = StyleSheet.create({
+    radiusMenuWrapper: {
+        position: "absolute",
+        bottom: 150,
+        right: 20,
+        zIndex: 50,
+        alignItems: "flex-end",
+    },
+
+    radiusMainButton: {
+        backgroundColor: "#fff",
+        paddingVertical: 12,
+        paddingHorizontal: 18,
+        borderRadius: 10,
+        elevation: 5,
+    },
+
+    radiusMainButtonText: {
+        fontWeight: "bold",
+        fontSize: 14,
+        color: "#000",
+    },
+
+    radiusMenu: {
+        marginTop: 10,
+        backgroundColor: "#579fc9ff",
+        borderRadius: 10,
+        padding: 10,
+        elevation: 5,
+        gap: 10
+    },
+
+    radiusOption: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 8,
+        backgroundColor: "#eee"
+    }
+});
