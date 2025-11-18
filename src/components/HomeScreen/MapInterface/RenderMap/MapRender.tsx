@@ -18,7 +18,7 @@ export default function MapRender() {
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
-        <View style={{display: 'flex', flexDirection: "column", zIndex: -10, height: "100%", borderColor: "red", borderWidth: 1}}>  
+        <View style={{display: 'flex', flexDirection: "column", zIndex: -10, height: "100%"}}>  
             <SearchBar/>
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
