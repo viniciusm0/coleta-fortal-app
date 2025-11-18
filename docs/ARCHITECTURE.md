@@ -16,5 +16,4 @@ Fluxo principal:
 
 Considerações técnicas:
 - Tipagem: TypeScript usado em todo o projeto.
-- Estilização: NativeWind/Tailwind para estilos responsivos no React Native.
 - Mapa: biblioteca baseada em MapView (ver `RenderMap` e componentes filhos).

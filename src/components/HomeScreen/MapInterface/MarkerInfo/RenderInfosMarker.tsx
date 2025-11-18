@@ -140,23 +140,23 @@ export default function RenderInfos(props: any) {
                                     <Text style={Styles.textLeftSide}>Bairro: </Text>
                                     <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
                                 </View>
-                            </View>
-                            <View style={Styles.rowInfoContainer}>
-                                <Text style={Styles.textLeftSide}>Tipo de Instituição: </Text>
-                                <Text style={Styles.textRightSide}>{markerInfo.tipoInstituicao}</Text>
-                            </View>
-                            <View style={Styles.rowInfoContainer}>
-                                <Text style={Styles.textLeftSide}>Frequência: </Text>
-                                <Text style={Styles.textRightSide}>{markerInfo.frequencia}</Text>
-                            </View>
-                            <View style={Styles.rowInfoContainer}>
-                                <Text style={Styles.textLeftSide}>Capacidade: </Text>
-                                <Text style={Styles.textRightSide}>{markerInfo.capacidade}</Text>
-                            </View>
-                            <View style={Styles.rowInfoContainer}>
-                                <Text style={Styles.textLeftSide}>Qnt Lixeiras: </Text>
-                                <Text style={Styles.textRightSide}>{markerInfo.qntLixeiras}</Text>
-                            </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Tipo de Coleta: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.tipoDeColeta}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Frequência: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.frequencia}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Capacidade: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.capacidade}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Qnt Lixeiras: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.qntLixeiras}</Text>
+                                </View>
+                            </View>  
                         </View>
                     )
                 case "Ponto de coleta domiciliar":
