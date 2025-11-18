@@ -28,10 +28,8 @@ export default function MarkersCircle(props : any) {
     const setMarkerInfo = props.markerInfo
     const mapRef = props.mapRef
     const MarkersJson = jsonTodos.features
-    let contagem = 1;
 
     return MarkersJson.map((marker) => {
-        // console.log(contagem)
         const id = marker.id.replace(/\W/g, " ").split(" ")[0].replace("vw_", "")
         const coordinate = {
             latitude: marker.geometry.coordinates[1],
@@ -39,6 +37,7 @@ export default function MarkersCircle(props : any) {
         }
         const distance = getDistance(coordinate, circleCenter)
         let descricaoTipo: string = "";
+        let image: any = null;
         let infos: infos = {
             nome: marker.properties.Nome ? marker.properties.Nome : marker.properties.nome,
             endereco: marker.properties.Endereço ? marker.properties.Endereço : marker.properties.endereço,
@@ -47,28 +46,15 @@ export default function MarkersCircle(props : any) {
 
         function tratarDescricao(descricao: string) {
             const descArray: string[] = descricao.replace("\t", "").split("\n")
-            // console.log("DesArray:")
-            // console.log(descArray)
             let descricaoTratada: {} | null = null
             descArray.forEach((info: string) => {
-                // console.log("info: " + info)
-                // console.log(info.search(/img/i) != 1)
                 if (info.search(/img/i) == -1 && info != "") {
-                    // console.log("entrou no if")
                     const infoArray = info.split(":")
                     const chave = infoArray[0].toLowerCase()
                     const valor = infoArray[1] ?? "Não informado"
-                    // console.log("chave: " + chave)
-                    // console.log("valor: " + valor)
-                    // console.log(`chave+valor: {"${chave}":"${valor}"}`)
                     if (descricaoTratada == null) {
                         descricaoTratada = JSON.parse(`{"${chave}":"${valor}"}`)
-                        // console.log(descricaoTratada)
                     } else {
-                        // console.log("chave do else: " + chave)
-                        // console.log("valor do else: " + valor)
-                        // console.log(`chave+valor do else: {"${chave}":"${valor}"}`)
-                        // console.log(`comando parse: {${JSON.stringify(descricaoTratada).replace(/[\{\}]/g, "")}, "${chave}":"${valor}"}`)
                         descricaoTratada = JSON.parse(`{${JSON.stringify(descricaoTratada).replace(/[\{\}]/g, "")}, "${chave}":"${valor}"}`)
                     }
                 }    
@@ -84,6 +70,7 @@ export default function MarkersCircle(props : any) {
                     id: descricaoTipo,
                     tipoInstituicao: marker.properties["Tipo de Instituição"]
                 }
+                image = require('@/assets/images/Biodigestor (1).png')
                 break
 
             case "CentroRecondicionamentoTecnologico":
@@ -94,6 +81,7 @@ export default function MarkersCircle(props : any) {
                     funcionamento: marker.properties.Funcionamento,
                     horario: marker.properties.Horário,
                 }
+                image = require('@/assets/images/Centrotecnologico1.png')
                 break
 
             case "Ecopontos":
@@ -106,7 +94,7 @@ export default function MarkersCircle(props : any) {
                     categoria: marker.properties.Categoria,
                     funcionamento: marker.properties.Funcionamento
                 }
-                break
+                image = require('@/assets/images/ecoponto.png') 
 
             case "IlhasEcologicas":
                 descricaoTipo = "Ilha Ecologica"
@@ -114,6 +102,7 @@ export default function MarkersCircle(props : any) {
                     ...infos,
                     id: descricaoTipo
                 };
+                image = require('@/assets/images/IlhaEcologica (1).png')
                 break
 
             case "LixeirasSubterraneas":
@@ -126,18 +115,18 @@ export default function MarkersCircle(props : any) {
                     capacidade: marker.properties["Capacidade (Litros)"],
                     qntLixeiras: marker.properties["Quantidade de lixeiras"],
                 }
+                image = require('@/assets/images/ecoponto.png')
                 break
 
             case "ColetaDomiciliarPontos":
                 descricaoTipo = "Ponto de coleta domiciliar"
-                // console.log(marker.properties.Descrição)
                 infos = {
                     id: descricaoTipo,
                     nome: marker.properties.Nome,
                     descricao: tratarDescricao(marker.properties.Descrição ?? "Não informado"),
                     tipoDeColeta: marker.properties["Tipo de coleta"],
                 }
-                // contagem++
+                image = require('@/assets/images/Coletadomiciliar (1).png')
                 break
 
             case "maquinas_reciclagem":
@@ -148,11 +137,18 @@ export default function MarkersCircle(props : any) {
                     funciona: marker.properties.funciona,
                     layer: marker.properties.layer
                 }
+                image = require('@/assets/images/Reciclagemmaquina.png')
                 break
-
         }
         if(distance <= circleRadius) {
             return (
+                //Retorna o marcador com:
+                //key= Id do marker
+                //title= uma estrutura de condição: se marker.properties.Nome existir, o titulo será o mesmo, caso não,
+                //será marker.properties.nome (A diferença dos dois é a letra N na chave "nome")
+                //description= descricaoTipo retornada do switch case acima
+                //coordinate= objeto coordinate criado acima
+                //pinColor= cor do pin
                 <Marker
                     key={marker.id}
                     title={marker.properties.Nome ? marker.properties.Nome : marker.properties.nome}
@@ -168,6 +164,7 @@ export default function MarkersCircle(props : any) {
                         setMarkerInfo(null)
                         mapRef.current.animateToRegion({...coordinate, latitudeDelta: 0.01, longitudeDelta: 0.01}, 1000)
                     }}
+                   {...(image ? { image } : {})}
                 />
             )
         }

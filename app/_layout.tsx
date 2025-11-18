@@ -1,6 +1,9 @@
-import React from "react";
-import { Stack } from "expo-router";
+import DrawerRoutes from "@/src/components/Routes/Drawer.routes";
 
 export default function RootLayout() {
-  return <Stack />;
+  console.log(">>> DrawerRoutes é:", DrawerRoutes);
+  console.log(">>> RootLayout carregou");
+  return (
+       <DrawerRoutes />
+  );
 }

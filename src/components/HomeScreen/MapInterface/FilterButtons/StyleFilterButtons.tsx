@@ -12,5 +12,5 @@ export const Styles = StyleSheet.create({
         boxShadow: "1px 1px 8px rgba(0, 0, 0, .4)",
         position: "absolute",
         top: "87%"
-    }
+    },
 })
