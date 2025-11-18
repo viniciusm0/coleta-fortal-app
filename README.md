@@ -1,50 +1,86 @@
-# Welcome to your Expo app 👋
+# COLETAFortal — Aplicativo de Coleta e Pontos de Resíduos (Fortaleza)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Projeto mobile (Expo + React Native + TypeScript) para visualização e gerenciamento de pontos de coleta de resíduos em Fortaleza. Este repositório contém o front-end do aplicativo, dados geoespaciais usados no mapa e componentes reutilizáveis.
 
-## Get started
+**Resumo:**
+- **Objetivo:** oferecer uma interface móvel que mostre pontos de coleta (ecopontos, ilhas ecológicas, biodigestores, lixeiras subterrâneas, pontos de coleta domiciliar, entre outros) com filtros, busca e informações detalhadas.
+- **Tecnologias:** Expo, React Native, TypeScript, MapView (biblioteca de mapas), GeoJSON para dados espaciais.
 
-1. Install dependencies
+**Funcionalidades principais:**
+- Mapa interativo com markers para diferentes tipos de pontos.
+- Filtros por categoria/serviço.
+- Busca por endereço/nome de ponto.
+- Informações detalhadas em marcadores (endereços, horários, observações).
+- Componentes para adicionar/retornar pontos (esqueleto/feature em desenvolvimento).
 
-   ```bash
-   npm install
-   ```
+## Estrutura do repositório
 
-2. Start the app
+- `app/` — arquivos de configuração do Expo e entrypoint.
+- `src/` — código-fonte do app:
+  - `components/` — componentes React organizados por tela e função (ex.: `HomeScreen/MapInterface/RenderMap/MapRender.tsx`).
+  - `hooks/` — hooks customizados (`useCoordsCircle.ts`, `useInitialLocation.ts`, `useMapRef.ts`).
+  - `screens/` — telas do app (`Home`, `Loading`, `Configuracoes`, `Sobre`, `FaleConosco`, etc.).
+  - `backend/` — dados geoespaciais (GeoJSON) usados pelo app:
+    - `Biodigestores.geojson`
+    - `Ecopontos.geojson`
+    - `Ilhas_Ecológicas.geojson`
+    - `Lixeiras_Subterrâneas.geojson`
+    - `Pontos_de_Coleta_Domiciliar.geojson`
+    - `Retorna_Machine.geojson`
+    - `Centro_de_Recondicionamento_Tecnológico.geojson`
+    - `JSONS.ts`, `JSONTODOS.ts` — utilitários/índices para carregar os dados.
 
-   ```bash
-   npx expo start
-   ```
+## Instalação (Windows / PowerShell)
 
-In the output, you'll find options to open the app in a
+1. Clone o repositório (se ainda não):
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```powershell
+git clone <url-do-repo>
+cd "d:\Programação\Projetos\app lixo\fortal-lixo-app"
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Instale dependências:
 
-## Learn more
+```powershell
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Inicie o Expo (abrirá o Metro bundler):
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```powershell
+npx expo start
+```
 
-## Join the community
+Abra no emulador Android/iOS ou num dispositivo físico usando o app Expo Go.
 
-Join our community of developers creating universal apps.
+## Como rodar em desenvolvimento
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Para rodar no Android (via emulador configurado):
+
+```powershell
+npx expo run:android
+```
+
+- Para rodar no iOS (macOS necessário) use:
+
+```bash
+npx expo run:ios
+```
+
+Observação: o projeto foi desenvolvido com foco em Expo/Android e testes em dispositivos reais.
+
+## Dados geoespaciais
+
+Os GeoJSONs estão em `src/backend/`. Para atualizar ou adicionar pontos:
+
+- Adicione/edite o arquivo `.geojson` correspondente.
+- Atualize `src/backend/JSONS.ts` ou `JSONTODOS.ts` caso precise exportar/registrar o novo arquivo para uso pelo app.
+
+## Comandos úteis
+
+- Instalar dependências: `npm install`
+- Iniciar bundler: `npx expo start`
+- Build Android (standalone): `eas build --platform android` (se EAS configurado)
+
+
+
