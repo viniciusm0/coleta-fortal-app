@@ -57,7 +57,7 @@ export default function MarkersCircle(props : any) {
                     // console.log("entrou no if")
                     const infoArray = info.split(":")
                     const chave = infoArray[0].toLowerCase()
-                    const valor = infoArray[1]
+                    const valor = infoArray[1] ?? "Não informado"
                     // console.log("chave: " + chave)
                     // console.log("valor: " + valor)
                     // console.log(`chave+valor: {"${chave}":"${valor}"}`)
@@ -134,10 +134,10 @@ export default function MarkersCircle(props : any) {
                 infos = {
                     id: descricaoTipo,
                     nome: marker.properties.Nome,
-                    descricao: tratarDescricao(marker.properties.Descrição ?? "a"),
+                    descricao: tratarDescricao(marker.properties.Descrição ?? "Não informado"),
                     tipoDeColeta: marker.properties["Tipo de coleta"],
                 }
-                contagem++
+                // contagem++
                 break
 
             case "maquinas_reciclagem":

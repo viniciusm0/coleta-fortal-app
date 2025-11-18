@@ -14,8 +14,8 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
-                            <Text>{markerInfo.nome}</Text>
-                            <View>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
                                 <Icon
                                     iconStyle={{}}
                                     name="place"
@@ -24,23 +24,43 @@ export default function RenderInfos(props: any) {
                             <Text>{markerInfo.endereco}</Text>
                             </View>
                             <View style={Styles.othersInfosContainer}>
-                                <View style={Styles.leftSideContainer}>
+                                <View style={Styles.rowInfoContainer}>
                                     <Text style={Styles.textLeftSide}>Bairro: </Text>
-                                </View>
-                                <View style={Styles.rightSideContainer}>
                                     <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Tipo de Instituição: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.tipoInstituicao}</Text>
                                 </View>
                             </View>
                         </View>
                     )
                 case "Centro de Recondicionamento Tecnolôgico":
                     return (
-                        <View style={Styles.infoContainer}>
+                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
-                            <Text>{markerInfo.nome}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                            <Text>{markerInfo.endereco}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <Text>Endereço: {markerInfo.endereco}</Text>
-                                <Text>Bairro: {markerInfo.bairro}</Text>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Bairro: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Funcionamento: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.funcionamento}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Horário: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.horario}</Text>
+                                </View>
                             </View>
                         </View>
                     )
@@ -48,11 +68,36 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
-                            <Text>{markerInfo.nome}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                            <Text>{markerInfo.endereco}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <Text>Endereço: {markerInfo.endereco}</Text>
-                                <Text>Bairro: {markerInfo.bairro}</Text>
-                                <Text>Funcionamento: {markerInfo.funcionamento}</Text>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Bairro: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Funcionamento: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.funcionamento}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Situação: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.situacao}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Modalidade: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.modalidade}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Categoria: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.categoria}</Text>
+                                </View>
                             </View>
                         </View>
                     )
@@ -60,10 +105,20 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
-                            <Text>{markerInfo.nome.trim()}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                            <Text>{markerInfo.endereco}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <Text>Endereço: {markerInfo.endereco.trim()}</Text>
-                                <Text>Bairro: {markerInfo.bairro}</Text>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Bairro: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
+                                </View>
                             </View>
                         </View>
                     )
@@ -71,16 +126,36 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                            <Text>{markerInfo.endereco}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <View style={Styles.leftSideContainer}>
-                                    Endereço:
-                                    Bairro:
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Bairro: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
                                 </View>
-                                <View style={Styles.rightSideContainer}>
-                                    <Text>{markerInfo.endereco}</Text>
-                                    <Text>{markerInfo.bairro}</Text>
-                                </View>
-                                <Text>{markerInfo.nome}</Text>
+                            </View>
+                            <View style={Styles.rowInfoContainer}>
+                                <Text style={Styles.textLeftSide}>Tipo de Instituição: </Text>
+                                <Text style={Styles.textRightSide}>{markerInfo.tipoInstituicao}</Text>
+                            </View>
+                            <View style={Styles.rowInfoContainer}>
+                                <Text style={Styles.textLeftSide}>Frequência: </Text>
+                                <Text style={Styles.textRightSide}>{markerInfo.frequencia}</Text>
+                            </View>
+                            <View style={Styles.rowInfoContainer}>
+                                <Text style={Styles.textLeftSide}>Capacidade: </Text>
+                                <Text style={Styles.textRightSide}>{markerInfo.capacidade}</Text>
+                            </View>
+                            <View style={Styles.rowInfoContainer}>
+                                <Text style={Styles.textLeftSide}>Qnt Lixeiras: </Text>
+                                <Text style={Styles.textRightSide}>{markerInfo.qntLixeiras}</Text>
                             </View>
                         </View>
                     )
@@ -88,11 +163,32 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                                <Text>{markerInfo.descricao.endereço}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <Text>Endereço: {markerInfo.descricao.endereço}</Text>
-                                <Text>Frequência: {markerInfo.descricao.frequencia}</Text>
-                                <Text>Periodo: {markerInfo.descricao.periodo}</Text>
-                                <Text>Equipamento: {markerInfo.descricao.equipamento}</Text>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Equipamento: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.descricao.equipamento ?? "Não informado"}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Frequência: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.descricao.frequencia ?? "Não informado"}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Periodo: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.descricao.periodo ?? "Não informado"}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Tipo de Coleta: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.tipoDeColeta ?? "Não informado"}</Text>
+                                </View>                 
                             </View>
                         </View>
                     )
@@ -100,10 +196,28 @@ export default function RenderInfos(props: any) {
                     return (
                         <View style={Styles.infoContainer}>
                             <Text style={Styles.titleInfo}>{markerInfo.id}</Text>
-                            <Text style={Styles.titleName}>{markerInfo.nome}</Text>
+                            <Text style={Styles.nomeInfo}>Local: {markerInfo.nome}</Text>
+                            <View style={Styles.addressArea}>
+                                <Icon
+                                    iconStyle={{}}
+                                    name="place"
+                                    color="black"
+                                />
+                                <Text>{markerInfo.endereco}</Text>
+                            </View>
                             <View style={Styles.othersInfosContainer}>
-                                <Text>Endereço: {markerInfo.endereco}</Text>
-                                <Text>Bairro: {markerInfo.bairro}</Text>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Bairro: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.bairro}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Funciona: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.funciona}</Text>
+                                </View>
+                                <View style={Styles.rowInfoContainer}>
+                                    <Text style={Styles.textLeftSide}>Layer: </Text>
+                                    <Text style={Styles.textRightSide}>{markerInfo.layer}</Text>
+                                </View>
                             </View>
                         </View>
                     )

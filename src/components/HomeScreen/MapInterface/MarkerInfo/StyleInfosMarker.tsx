@@ -6,8 +6,8 @@ export const Styles = StyleSheet.create({
         backgroundColor: "white",
         position: "absolute",
         width: "100%",
-        height: 260,
-        top: "57%",
+        height: 300,
+        top: "52%",
         padding: 15
     },
 
@@ -16,18 +16,32 @@ export const Styles = StyleSheet.create({
         gap: 10,
     },
 
+    nomeInfo: {
+        fontSize: 16,
+    },
+
     othersInfosContainer: {
         flex: 1,
-        flexDirection: "row",
+        flexDirection: "column",
         paddingHorizontal: 30,
         paddingVertical: 15,
         width: "100%",
         backgroundColor: "rgb(239,241,243)",
         borderRadius: 10,
+        gap: 4,
     },
 
-    leftSideContainer: {
-        width: "50%",
+    rowInfoContainer: {
+        display: "flex", 
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+
+    addressArea: {
+        display: "flex",
+        flexDirection: "row",
+        gap: 4,
+        alignItems: "center",
     },
 
     textLeftSide: {
@@ -36,10 +50,14 @@ export const Styles = StyleSheet.create({
 
     textRightSide: {
         color: "black",
-        fontWeight: 600
+        fontWeight: 600,
+        width: "50%",
     },
 
     rightSideContainer: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
         width: "50%",
     },
 
