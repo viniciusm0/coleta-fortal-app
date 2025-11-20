@@ -1,13 +1,13 @@
+import Ajuda from '@/src/screens/Ajuda/Ajuda';
 import Configuracoes from '@/src/screens/Configuracoes/Configuracoes';
 import FaleConosco from '@/src/screens/FaleConosco/FaleConosco';
 import Home from '@/src/screens/Home/HomeScreen';
-import Sobre from '@/src/screens/Sobre/Sobre';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 console.log("HomeScreen:", Home);
 console.log("ConfigScreen:", Configuracoes);
 console.log("FaleConosco:", FaleConosco);
-console.log("Sobre:", Sobre);
+console.log("Ajuda:", Ajuda);
 
 const Drawer = createDrawerNavigator();
 
@@ -30,8 +30,8 @@ export default function DrawerRoutes(){
             />
              
              <Drawer.Screen
-                 name="Sobre"
-                component={Sobre}
+                 name="Ajuda"
+                component={Ajuda}
              />
 
             
