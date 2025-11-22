@@ -6,8 +6,10 @@ import { Styles } from "./Styles";
 
 export default function SearchBar(props: any) {
     const setPonto = props.setInfoPonto
+    const setShowResult = props.setShowResult
+    const showResult = props.showResult
+    const textInputRef = props.textInputRef
     const [textInput, setTextInput] = useState("")
-    const [showResult, setShowResult] = useState<boolean>(false)
 
     function handleTextChange(novoTexto: any) {
         setTextInput(novoTexto)
@@ -15,10 +17,11 @@ export default function SearchBar(props: any) {
     }
     
     return (
-        <View>
-            <View style={Styles.container}>
+        <View style={Styles.container}>
+            <View style={Styles.searchBar}>
                 <TextInput
-                    style={Styles.searchBar}
+                    ref={textInputRef}
+                    style={Styles.searchBarInput}
                     placeholder="Pesquise um ponto de coleta"
                     onChangeText={handleTextChange}
                 />
@@ -28,7 +31,11 @@ export default function SearchBar(props: any) {
                     color="white"
                 />
             </View>
-            {showResult && textInput != "" ? <ResultSearch setPonto={setPonto} text={textInput} showResult={setShowResult}/> : <></>}
+            {showResult && textInput != "" ? 
+                <View style={Styles.resultSearch}>
+                    <ResultSearch setPonto={setPonto} text={textInput} showResult={setShowResult} textInputRef={textInputRef}/>
+                </View> : <></>
+            }
         </View>  
     )
 }

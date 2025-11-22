@@ -6,6 +6,7 @@ export default function ResultSearch(props: any) {
     const Marcadores = jsonTodos.features
     const showResult = props.showResult
     const setPonto = props.setPonto
+    const textInputRef = props.textInputRef
 
     return Marcadores.map((ponto) => {
         function retornarComp(p: any) {
@@ -14,6 +15,7 @@ export default function ResultSearch(props: any) {
                     onPress={() => {
                         setPonto(p, ponto)
                         showResult(false)
+                        textInputRef.current?.blur()
                         }
                     } key={ponto.id+ponto.type} style={Styles.teste}>
                     <Text style={Styles.textoTeste}>Nome: {p.nome}</Text>

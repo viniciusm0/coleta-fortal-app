@@ -9,7 +9,7 @@ import useInitialLocation from "@/src/hooks/useInitialLocation";
 import useMapRef from '@/src/hooks/useMapRef';
 import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
 import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 import { Styles } from "./MapRenderStyles";
@@ -33,7 +33,9 @@ export default function MapRender(props: any) {
     const [markerInfo, setMarkerInfo] = useState<{} | null>(null)
     const [pontoSearched, setPontoSearched] = useState<boolean>(false)
     const [pontoSearch, setPontoSearch] = useState<{} | null>(null)
+    const [showResult, setShowResult] = useState<boolean>(false)
     const mapRef = useMapRef()
+    const textInputRef = useRef(null)
 
     const handleMarkerInfo = (marker: {}) => {
         if (marker != null) {
@@ -58,7 +60,7 @@ export default function MapRender(props: any) {
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
         <View style={Styles.containerMap}>  
-            <SearchBar setInfoPonto={handleInfosPontoResult}/>
+            <SearchBar setInfoPonto={handleInfosPontoResult} showResult={showResult} setShowResult={setShowResult} textInputRef={textInputRef}/>
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
@@ -67,6 +69,8 @@ export default function MapRender(props: any) {
                 onLongPress={renderCircleOnPress}
                 onPress={() => {
                     setMarkerInfo(null)
+                    setShowResult(false)
+                    textInputRef.current.blur()
                 }}
             >
                 <Marker
