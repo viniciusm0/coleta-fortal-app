@@ -2,6 +2,7 @@ import FilterButtons from '@/src/components/HomeScreen/MapInterface/FilterButton
 import RenderInfosMarker from "@/src/components/HomeScreen/MapInterface/MarkerInfo/RenderInfosMarker";
 import MarkersCircle from '@/src/components/HomeScreen/MapInterface/RenderMap/MarkersCircle';
 import ReturnBackButton from '@/src/components/HomeScreen/MapInterface/ReturnBackButton/ReturnBackButton';
+import RenderMarkerSearch from "@/src/components/HomeScreen/MapInterface/Searchbar/RenderMarkerSearch";
 import SearchBar from "@/src/components/HomeScreen/MapInterface/Searchbar/Searchbar";
 import { useCoordsCircle } from '@/src/hooks/useCoordsCircle';
 import useInitialLocation from "@/src/hooks/useInitialLocation";
@@ -13,11 +14,25 @@ import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 import { Styles } from "./MapRenderStyles";
 
+type info = {
+    nome: string,
+    endereco: string,
+    bairro: string,
+    cords: {
+        latitude: number,
+        longitude: number,
+        latidudeDelta: number,
+        longitudeDelta: number
+    }
+}
+
 export default function MapRender(props: any) {
     const radius = props.radiusInfo
     const { initialRegion, loading, error } = useInitialLocation();
     const { circleCenter, renderCircleOnPress } = useCoordsCircle();
     const [markerInfo, setMarkerInfo] = useState<{} | null>(null)
+    const [pontoSearched, setPontoSearched] = useState<boolean>(false)
+    const [pontoSearch, setPontoSearch] = useState<{} | null>(null)
     const mapRef = useMapRef()
 
     const handleMarkerInfo = (marker: {}) => {
@@ -28,18 +43,31 @@ export default function MapRender(props: any) {
         }
     }
 
+    const handleInfosPontoResult = (infos: info, marker: {}) => {
+        if (infos != null && marker != null) {
+                setPontoSearched(true)
+                setPontoSearch(marker)
+                mapRef.current.animateToRegion(infos.cords, 1500) 
+        } else {
+            setPontoSearched(false)
+        }
+    }
+
     if (loading || !initialRegion) return <LoadingScreen/>
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
         <View style={Styles.containerMap}>  
-            <SearchBar/>
+            <SearchBar setInfoPonto={handleInfosPontoResult}/>
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
                 style={Styles.mapViewStyle}
                 onLongPress={renderCircleOnPress}
+                onPress={() => {
+                    setMarkerInfo(null)
+                }}
             >
                 <Marker
                     //pinColor='#3399ff'
@@ -49,6 +77,7 @@ export default function MapRender(props: any) {
                     description="Esta é sua localização."
                     coordinate={{latitude: initialRegion.latitude, longitude: initialRegion.longitude}}
                 />
+                {pontoSearched ? <RenderMarkerSearch mapRef={mapRef} markerInfo={pontoSearch} handleMarkerInfo={handleMarkerInfo}/> : <></>}
                 {circleCenter && (
                     <Circle
                         center={circleCenter}
@@ -61,34 +90,6 @@ export default function MapRender(props: any) {
                 <MarkersCircle circleCenter={circleCenter} markerInfo={handleMarkerInfo} mapRef={mapRef} circleRadius={radius} />
             </MapView>
             {markerInfo != null ? <RenderInfosMarker MarkerInfo={markerInfo}/> : <></>}
-            {/* <View style={styles.radiusMenuWrapper}> */}
-    {/* <Pressable
-        style={styles.radiusMainButton}
-        onPress={() => setShowRadiusMenu(!showRadiusMenu)}
-    >
-        <Text style={styles.radiusMainButtonText}>Raio</Text>
-    </Pressable> */}
-
-
-    {/* {showRadiusMenu && (
-        <View style={styles.radiusMenu}>
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(300); setShowRadiusMenu(false); }}>
-                <Text>300m</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(500); setShowRadiusMenu(false); }}>
-                <Text>500m</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(1000); setShowRadiusMenu(false); }}>
-                <Text>1 km</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(2000); setShowRadiusMenu(false); }}>
-                <Text>2 km</Text>
-            </Pressable>
-        </View>
-    )} */}
         <FilterButtons/>
     </View>  
     )

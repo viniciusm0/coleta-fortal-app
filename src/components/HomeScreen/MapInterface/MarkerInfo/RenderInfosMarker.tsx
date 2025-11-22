@@ -7,6 +7,8 @@ export default function RenderInfos(props: any) {
     // console.log(typeof markerInfo.descricao)
     if (markerInfo != null) {
         function InfoComponent() {
+            console.log("Info Component")
+            console.log(markerInfo)
             console.log(markerInfo.id)
             switch(markerInfo.id) {
                 case "Bio digestor":

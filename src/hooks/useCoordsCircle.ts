@@ -20,6 +20,6 @@ export const useCoordsCircle = () => {
         setCircleCenter(event.nativeEvent.coordinate)
     }, [])
 
-    return { circleCenter, renderCircleOnPress, setCircleCenter}
+    return { circleCenter, renderCircleOnPress, setCircleCenter }
 }
 

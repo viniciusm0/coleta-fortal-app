@@ -4,17 +4,16 @@ import { Icon } from 'react-native-elements';
 import ResultSearch from "./ResultSearch";
 import { Styles } from "./Styles";
 
-function handleInputValue(TextInput: string) {
-    console.log(`O texto pesquisado foi: ${TextInput}`)
-    
-}
-
-export default function SearchBar() {
+export default function SearchBar(props: any) {
+    const setPonto = props.setInfoPonto
     const [textInput, setTextInput] = useState("")
+    const [showResult, setShowResult] = useState<boolean>(false)
 
     function handleTextChange(novoTexto: any) {
         setTextInput(novoTexto)
-    }   
+        setShowResult(true)
+    }
+    
     return (
         <View>
             <View style={Styles.container}>
@@ -27,10 +26,9 @@ export default function SearchBar() {
                     iconStyle={Styles.iconSearch}
                     name="search"
                     color="white"
-                    onPress={() => handleInputValue(textInput)}
                 />
             </View>
-            {textInput != "" ? <ResultSearch text={textInput}/> : <></>}
+            {showResult && textInput != "" ? <ResultSearch setPonto={setPonto} text={textInput} showResult={setShowResult}/> : <></>}
         </View>  
     )
 }

@@ -1,25 +1,37 @@
 import { jsonTodos } from "@/src/backend/JSONTODOS";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 export default function ResultSearch(props: any) {
     const texto = props.text
     const Marcadores = jsonTodos.features
+    const showResult = props.showResult
+    const setPonto = props.setPonto
 
     return Marcadores.map((ponto) => {
         function retornarComp(p: any) {
-            console.log(p.nome)
             return (
-                <View key={p.id} style={Styles.teste}>
+                <Pressable 
+                    onPress={() => {
+                        setPonto(p, ponto)
+                        showResult(false)
+                        }
+                    } key={ponto.id+ponto.type} style={Styles.teste}>
                     <Text style={Styles.textoTeste}>Nome: {p.nome}</Text>
                     <Text style={Styles.textoTeste}>Endereço: {p.endereco}</Text>
                     <Text style={Styles.textoTeste}>Bairro: {p.bairro}</Text>
-                </View>
+                </Pressable>
             ) 
         }
 
         const nome = ponto.properties.Nome ? ponto.properties.Nome : ponto.properties.nome
         const endereco = ponto.properties.Endereço ? ponto.properties.Endereço : ponto.properties.endereço
         const bairro = ponto.properties.Bairro ? ponto.properties.Bairro : ponto.properties.bairro
+        const coordenadas = {
+            latitude: ponto.geometry.coordinates[1],
+            longitude: ponto.geometry.coordinates[0],
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
+        } 
 
         if (nome != undefined && endereco != undefined && bairro != undefined) {
             if (texto.startsWith("rua") || texto.startsWith("avenida") || texto.startsWith("av.") ||
@@ -30,7 +42,8 @@ export default function ResultSearch(props: any) {
                             id: ponto.id,
                             nome: nome,
                             endereco: endereco,
-                            bairro: bairro
+                            bairro: bairro,
+                            cords: coordenadas
                     })
                 }
             } else if (nome.toLowerCase().match(texto.toLowerCase()) || bairro.toLowerCase().match(texto.toLowerCase())) {
@@ -38,7 +51,8 @@ export default function ResultSearch(props: any) {
                     id: ponto.id,
                     nome: nome,
                     endereco: endereco,
-                    bairro: bairro
+                    bairro: bairro,
+                    cords: coordenadas
                 })
             } else {
                 return <></>
