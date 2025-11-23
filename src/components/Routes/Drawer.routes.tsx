@@ -4,10 +4,6 @@ import FaleConosco from '@/src/screens/FaleConosco/FaleConosco';
 import Home from '@/src/screens/Home/HomeScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-console.log("HomeScreen:", Home);
-console.log("ConfigScreen:", Configuracoes);
-console.log("FaleConosco:", FaleConosco);
-console.log("Ajuda:", Ajuda);
 
 const Drawer = createDrawerNavigator();
 
