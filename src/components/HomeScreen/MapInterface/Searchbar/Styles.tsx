@@ -49,5 +49,20 @@ export const Styles = StyleSheet.create({
         height: "100%",
     },
 
+    closeSearch: {
+        position: "absolute",
+        top: "98%",
+        left: "33%",
+        backgroundColor: "#ff0000",
+        padding: 5,
+        borderRadius: 10,
+    },
+
+    textCloseSearch: {
+        color: "#fff",
+        fontSize: 15,
+        fontWeight: "bold",
+    }
+
 
 })
