@@ -1,5 +1,6 @@
 import { jsonTodos } from "@/src/backend/JSONTODOS";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Icon } from 'react-native-elements';
 
 export default function ResultSearch(props: any) {
     const texto = props.text
@@ -17,10 +18,24 @@ export default function ResultSearch(props: any) {
                         showResult(false)
                         textInputRef.current?.blur()
                         }
-                    } key={ponto.id+ponto.type} style={Styles.teste}>
-                    <Text style={Styles.textoTeste}>Nome: {p.nome}</Text>
-                    <Text style={Styles.textoTeste}>Endereço: {p.endereco}</Text>
-                    <Text style={Styles.textoTeste}>Bairro: {p.bairro}</Text>
+                    } key={ponto.id+ponto.type} style={Styles.container}>
+                    <View style={Styles.rowInfo}>
+                        <Text style={Styles.titulo}>Nome do local</Text>
+                        <Text style={Styles.info}>{p.nome}</Text>
+                    </View>
+                    <View style={Styles.rowInfoEndereco}>
+                        <View>
+                            <Icon
+                                iconStyle={{}}
+                                name="place"
+                                color="black"
+                            />
+                        </View>
+                        <View>
+                            <Text style={Styles.titulo}>Endereço</Text>
+                            <Text style={Styles.info}>{p.endereco}, {p.bairro}</Text>
+                        </View>
+                    </View>
                 </Pressable>
             ) 
         }
@@ -31,8 +46,8 @@ export default function ResultSearch(props: any) {
         const coordenadas = {
             latitude: ponto.geometry.coordinates[1],
             longitude: ponto.geometry.coordinates[0],
-            latitudeDelta: 0.001,
-            longitudeDelta: 0.001
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01
         } 
 
         if (nome != undefined && endereco != undefined && bairro != undefined) {
@@ -64,12 +79,32 @@ export default function ResultSearch(props: any) {
 }
 
 const Styles = StyleSheet.create({
-    teste: {
+    container: {
         backgroundColor: "white",
-        padding: 10,
+        padding: 15,
+        borderBottomWidth: 1,
+        borderColor: "#c0c0c0ff",
     },
 
-    textoTeste: {
-        color: "black"
-    }
+    titulo: {
+        color: "#868686ff",
+        fontWeight: "bold"
+    },
+
+    info: {
+        color: "black",
+        fontWeight: "bold"
+    },
+
+    rowInfo: {
+        marginBottom: 5,
+    },
+
+    rowInfoEndereco: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 5,
+        marginBottom: 5,
+    },
 })

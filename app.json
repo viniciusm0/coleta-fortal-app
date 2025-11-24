@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ColetaFortal",
-    "slug": "ColetaFortal",
+    "slug": "coleta-fortal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.jpg",

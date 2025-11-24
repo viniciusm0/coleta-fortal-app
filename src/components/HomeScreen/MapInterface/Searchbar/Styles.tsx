@@ -13,7 +13,7 @@ export const Styles = StyleSheet.create({
         boxShadow: "1px 1px 8px rgba(0, 0, 0, .4)",
         borderWidth: 1,
         borderColor: "white",
-        overflow: "scroll"
+        width: "96%",
     },
 
     searchBar: {
@@ -25,7 +25,9 @@ export const Styles = StyleSheet.create({
         padding: 3,
         paddingLeft: 8,
         paddingEnd: 10,
-        borderWidth: 1, 
+        borderWidth: 1,
+        position: "sticky",
+        top: 0, 
     },
 
     searchBarInput: {
@@ -41,6 +43,8 @@ export const Styles = StyleSheet.create({
 
     resultSearch: {
         borderTopWidth: 1,
+        width: "94%",
+        margin: "auto",
         borderColor: "black",
         height: "100%",
     },

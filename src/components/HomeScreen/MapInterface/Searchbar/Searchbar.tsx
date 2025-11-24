@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput, View } from "react-native";
+import { ScrollView, TextInput, View } from "react-native";
 import { Icon } from 'react-native-elements';
 import ResultSearch from "./ResultSearch";
 import { Styles } from "./Styles";
@@ -32,9 +32,14 @@ export default function SearchBar(props: any) {
                 />
             </View>
             {showResult && textInput != "" ? 
-                <View style={Styles.resultSearch}>
-                    <ResultSearch setPonto={setPonto} text={textInput} showResult={setShowResult} textInputRef={textInputRef}/>
-                </View> : <></>
+                <ScrollView style={Styles.resultSearch}>
+                    <ResultSearch 
+                        setPonto={setPonto} 
+                        text={textInput} 
+                        showResult={setShowResult} 
+                        textInputRef={textInputRef}
+                    />
+                </ScrollView> : <></>
             }
         </View>  
     )

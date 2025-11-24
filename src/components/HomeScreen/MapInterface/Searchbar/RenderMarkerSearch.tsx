@@ -135,12 +135,10 @@ export default function RenderMarkerSearch(props: any) {
             break
     }
 
-    handleMarkerInfo(infos)
-
     return (
         <Marker
-            key={marker.id}
-            title={marker.properties.Nome ? marker.properties.Nome : marker.properties.nome}
+            key={marker.id+infos.nome}
+            title={infos.nome}
             description={`${descricaoTipo}`}
             coordinate={coordinate}
             pinColor={"aqua"}

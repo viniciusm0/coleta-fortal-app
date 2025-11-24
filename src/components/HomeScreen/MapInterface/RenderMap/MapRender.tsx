@@ -35,7 +35,7 @@ export default function MapRender(props: any) {
     const [pontoSearch, setPontoSearch] = useState<{} | null>(null)
     const [showResult, setShowResult] = useState<boolean>(false)
     const mapRef = useMapRef()
-    const textInputRef = useRef(null)
+    const textInputRef = useRef<any>(null)
 
     const handleMarkerInfo = (marker: {}) => {
         if (marker != null) {
@@ -60,7 +60,12 @@ export default function MapRender(props: any) {
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
         <View style={Styles.containerMap}>  
-            <SearchBar setInfoPonto={handleInfosPontoResult} showResult={showResult} setShowResult={setShowResult} textInputRef={textInputRef}/>
+            <SearchBar 
+                setInfoPonto={handleInfosPontoResult} 
+                showResult={showResult} 
+                setShowResult={setShowResult} 
+                textInputRef={textInputRef}
+            />
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
