@@ -98,7 +98,7 @@ export default function MapRender(props: any) {
                 )}
                 <MarkersCircle circleCenter={circleCenter} markerInfo={handleMarkerInfo} mapRef={mapRef} circleRadius={radius} />
             </MapView>
-            {markerInfo != null ? <RenderInfosMarker MarkerInfo={markerInfo}/> : <></>}
+            {markerInfo != null ? <RenderInfosMarker MarkerInfo={markerInfo} handleMarkerInfo={handleMarkerInfo}/> : <></>}
         <FilterButtons/>
     </View>  
     )

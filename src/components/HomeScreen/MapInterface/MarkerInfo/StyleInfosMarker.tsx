@@ -70,4 +70,10 @@ export const Styles = StyleSheet.create({
     titleName: {
         fontSize: 15,
     },
+
+    closeButton: {
+        position: "absolute",
+        left: "5%",
+        top: "-7%",
+    }
 })

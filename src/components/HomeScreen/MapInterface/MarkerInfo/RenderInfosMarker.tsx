@@ -1,9 +1,10 @@
 import { Styles } from "@/src/components/HomeScreen/MapInterface/MarkerInfo/StyleInfosMarker";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Icon } from 'react-native-elements';
 
 export default function RenderInfos(props: any) {
     const markerInfo = props.MarkerInfo
+    const handleMarkerInfo = props.handleMarkerInfo
     // console.log(typeof markerInfo.descricao)
     if (markerInfo != null) {
         function InfoComponent() {
@@ -228,6 +229,24 @@ export default function RenderInfos(props: any) {
         
         return (
             <View style={Styles.container}>
+                <Pressable 
+                    style={Styles.closeButton}
+                    onPress={() => {
+                        handleMarkerInfo(null)
+                    }}
+                >
+                    <Icon
+                        iconStyle={{
+                            color: "#ffffffff",
+                            backgroundColor: "#ff0000ff",
+                            borderRadius: 10,
+                            padding: 4,
+                            fontSize: 33,
+                        }}
+                        name="close"
+                        color="black"
+                    />
+                </Pressable>
                 <InfoComponent/>
             </View>
         )
