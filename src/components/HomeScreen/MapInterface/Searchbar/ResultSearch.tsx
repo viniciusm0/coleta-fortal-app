@@ -9,37 +9,24 @@ export default function ResultSearch(props: any) {
     const setPonto = props.setPonto
     const textInputRef = props.textInputRef
 
-    return Marcadores.map((ponto) => {
-        function retornarComp(p: any) {
-            return (
-                <Pressable 
-                    onPress={() => {
-                        setPonto(p, ponto)
-                        showResult(false)
-                        textInputRef.current?.blur()
-                        }
-                    } key={ponto.id+ponto.type} style={Styles.container}>
-                    <View style={Styles.rowInfo}>
-                        <Text style={Styles.titulo}>Nome do local</Text>
-                        <Text style={Styles.info}>{p.nome}</Text>
-                    </View>
-                    <View style={Styles.rowInfoEndereco}>
-                        <View>
-                            <Icon
-                                iconStyle={{}}
-                                name="place"
-                                color="black"
-                            />
-                        </View>
-                        <View>
-                            <Text style={Styles.titulo}>Endereço</Text>
-                            <Text style={Styles.info}>{p.endereco}, {p.bairro}</Text>
-                        </View>
-                    </View>
-                </Pressable>
-            ) 
-        }
+    return Marcadores.filter((ponto) => {
+        const nome = ponto.properties.Nome ? ponto.properties.Nome : ponto.properties.nome
+        const endereco = ponto.properties.Endereço ? ponto.properties.Endereço : ponto.properties.endereço
+        const bairro = ponto.properties.Bairro ? ponto.properties.Bairro : ponto.properties.bairro
 
+        if (nome != undefined && endereco != undefined && bairro != undefined) {
+            if (texto.startsWith("rua") || texto.startsWith("avenida") || texto.startsWith("av.") ||
+                texto.startsWith("Rua") || texto.startsWith("Avenida") || texto.startsWith("Av.")
+            ) {
+                if (endereco.toLowerCase().match(texto.toLowerCase())) {
+                    return true
+                }
+            } else if (nome.toLowerCase().match(texto.toLowerCase()) || bairro.toLowerCase().match(texto.toLowerCase())) {
+                return true
+            }
+        }
+        return false
+    }).map((ponto, index) => {
         const nome = ponto.properties.Nome ? ponto.properties.Nome : ponto.properties.nome
         const endereco = ponto.properties.Endereço ? ponto.properties.Endereço : ponto.properties.endereço
         const bairro = ponto.properties.Bairro ? ponto.properties.Bairro : ponto.properties.bairro
@@ -50,31 +37,41 @@ export default function ResultSearch(props: any) {
             longitudeDelta: 0.01
         } 
 
-        if (nome != undefined && endereco != undefined && bairro != undefined) {
-            if (texto.startsWith("rua") || texto.startsWith("avenida") || texto.startsWith("av.") ||
-                texto.startsWith("Rua") || texto.startsWith("Avenida") || texto.startsWith("Av.")
-            ) {
-                if (endereco.toLowerCase().match(texto.toLowerCase())) {
-                    return retornarComp({
-                            id: ponto.id,
-                            nome: nome,
-                            endereco: endereco,
-                            bairro: bairro,
-                            cords: coordenadas
-                    })
-                }
-            } else if (nome.toLowerCase().match(texto.toLowerCase()) || bairro.toLowerCase().match(texto.toLowerCase())) {
-                return retornarComp({
-                    id: ponto.id,
-                    nome: nome,
-                    endereco: endereco,
-                    bairro: bairro,
-                    cords: coordenadas
-                })
-            } else {
-                return <></>
-            }
+        const p = {
+            id: ponto.id,
+            nome: nome || "",
+            endereco: endereco || "",
+            bairro: bairro || "",
+            cords: coordenadas
         }
+
+        return (
+            <Pressable 
+                onPress={() => {
+                    setPonto(p, ponto)
+                    showResult(false)
+                    textInputRef.current?.blur()
+                    }
+                } key={ponto.id ? String(ponto.id) + (ponto.type || '') : index} style={Styles.container}>
+                <View style={Styles.rowInfo}>
+                    <Text style={Styles.titulo}>Nome do local</Text>
+                    <Text style={Styles.info}>{String(p.nome)}</Text>
+                </View>
+                <View style={Styles.rowInfoEndereco}>
+                    <View>
+                        <Icon
+                            iconStyle={{}}
+                            name="place"
+                            color="black"
+                        />
+                    </View>
+                    <View>
+                        <Text style={Styles.titulo}>Endereço</Text>
+                        <Text style={Styles.info}>{String(p.endereco)}, {String(p.bairro)}</Text>
+                    </View>
+                </View>
+            </Pressable>
+        ) 
     })
 }
 

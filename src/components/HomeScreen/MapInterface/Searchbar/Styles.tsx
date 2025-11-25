@@ -31,7 +31,8 @@ export const Styles = StyleSheet.create({
     },
 
     searchBarInput: {
-        width: "90%"
+        width: "90%",
+        color: "#000"
     },
 
     iconSearch: {
