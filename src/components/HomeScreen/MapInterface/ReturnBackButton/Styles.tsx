@@ -9,10 +9,12 @@ export const Styles = StyleSheet.create({
         width: 100,
         padding: 5,
         margin: 10,
+        marginTop: 70,
         textAlign: 'center',
         borderRadius: 10,
         backgroundColor: "black",
         color: "white",
         fontSize: 16,
+        alignSelf: "flex-start"
     }
 })

@@ -1,34 +1,82 @@
 import FilterButtons from '@/src/components/HomeScreen/MapInterface/FilterButtons/FilterButtons';
+import RenderInfosMarker from "@/src/components/HomeScreen/MapInterface/MarkerInfo/RenderInfosMarker";
 import MarkersCircle from '@/src/components/HomeScreen/MapInterface/RenderMap/MarkersCircle';
 import ReturnBackButton from '@/src/components/HomeScreen/MapInterface/ReturnBackButton/ReturnBackButton';
+import RenderMarkerSearch from "@/src/components/HomeScreen/MapInterface/Searchbar/RenderMarkerSearch";
 import SearchBar from "@/src/components/HomeScreen/MapInterface/Searchbar/Searchbar";
 import { useCoordsCircle } from '@/src/hooks/useCoordsCircle';
 import useInitialLocation from "@/src/hooks/useInitialLocation";
 import useMapRef from '@/src/hooks/useMapRef';
 import WithoutLocationScreen from "@/src/screens/Error/WithoutLocationScreen";
 import LoadingScreen from "@/src/screens/Loading/LoadingScreen";
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
+import { Styles } from "./MapRenderStyles";
 
-export default function MapRender() {
-    const [radius, setRadius] = useState(300);
-    const [showRadiusMenu, setShowRadiusMenu] = useState(false);
+type info = {
+    nome: string,
+    endereco: string,
+    bairro: string,
+    cords: {
+        latitude: number,
+        longitude: number,
+        latidudeDelta: number,
+        longitudeDelta: number
+    }
+}
+
+export default function MapRender(props: any) {
+    const radius = props.radiusInfo
     const { initialRegion, loading, error } = useInitialLocation();
     const { circleCenter, renderCircleOnPress } = useCoordsCircle();
+    const [markerInfo, setMarkerInfo] = useState<{} | null>(null)
+    const [pontoSearched, setPontoSearched] = useState<boolean>(false)
+    const [pontoSearch, setPontoSearch] = useState<{} | null>(null)
+    const [showResult, setShowResult] = useState<boolean>(false)
     const mapRef = useMapRef()
+    const textInputRef = useRef<any>(null)
+
+    const handleMarkerInfo = (marker: {}) => {
+        if (marker != null) {
+            setMarkerInfo(marker)
+        } else {
+            setMarkerInfo(null)
+        }
+    }
+
+    const handleInfosPontoResult = (infos: info, marker: {}) => {
+        if (infos != null && marker != null) {
+                setPontoSearched(true)
+                setPontoSearch(marker)
+                mapRef.current.animateToRegion(infos.cords, 1500) 
+        } else {
+            setPontoSearched(false)
+        }
+    }
+
     if (loading || !initialRegion) return <LoadingScreen/>
     if (error == 'Permissão negada') return <WithoutLocationScreen/>
     console.log("Região inicial / Latitude: " + initialRegion.latitude+ ", Longitude: " + initialRegion.longitude)
     return (
-        <View style={{display: 'flex', flexDirection: "column", zIndex: -10, height: "100%", borderColor: "red", borderWidth: 1}}>  
-            <SearchBar/>
+        <View style={Styles.containerMap}>  
+            <SearchBar 
+                setInfoPonto={handleInfosPontoResult} 
+                showResult={showResult} 
+                setShowResult={setShowResult} 
+                textInputRef={textInputRef}
+            />
             <ReturnBackButton initialRegion={initialRegion} mapRef={mapRef} /> 
             <MapView
                 ref={mapRef}
                 initialRegion={initialRegion}
-                style={{width: '100%', height: '91%', zIndex: -10, position: 'absolute'}}
+                style={Styles.mapViewStyle}
                 onLongPress={renderCircleOnPress}
+                onPress={() => {
+                    setMarkerInfo(null)
+                    setShowResult(false)
+                    textInputRef.current.blur()
+                }}
             >
                 <Marker
                     //pinColor='#3399ff'
@@ -38,6 +86,7 @@ export default function MapRender() {
                     description="Esta é sua localização."
                     coordinate={{latitude: initialRegion.latitude, longitude: initialRegion.longitude}}
                 />
+                {pontoSearched ? <RenderMarkerSearch mapRef={mapRef} markerInfo={pontoSearch} handleMarkerInfo={handleMarkerInfo}/> : <></>}
                 {circleCenter && (
                     <Circle
                         center={circleCenter}
@@ -47,39 +96,11 @@ export default function MapRender() {
                         strokeWidth={25}
                     />
                 )}
-                <MarkersCircle circleCenter={circleCenter} circleRadius={radius} />
+                <MarkersCircle circleCenter={circleCenter} markerInfo={handleMarkerInfo} mapRef={mapRef} circleRadius={radius} />
             </MapView>
-            <View style={styles.radiusMenuWrapper}>
-    <Pressable
-        style={styles.radiusMainButton}
-        onPress={() => setShowRadiusMenu(!showRadiusMenu)}
-    >
-        <Text style={styles.radiusMainButtonText}>Raio</Text>
-    </Pressable>
-
-
-    {showRadiusMenu && (
-        <View style={styles.radiusMenu}>
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(300); setShowRadiusMenu(false); }}>
-                <Text>300m</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(500); setShowRadiusMenu(false); }}>
-                <Text>500m</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(1000); setShowRadiusMenu(false); }}>
-                <Text>1 km</Text>
-            </Pressable>
-
-            <Pressable style={styles.radiusOption} onPress={() => { setRadius(2000); setShowRadiusMenu(false); }}>
-                <Text>2 km</Text>
-            </Pressable>
-        </View>
-    )}
-</View>
-            <FilterButtons/>
-        </View>  
+            {markerInfo != null ? <RenderInfosMarker MarkerInfo={markerInfo} handleMarkerInfo={handleMarkerInfo}/> : <></>}
+        <FilterButtons/>
+    </View>  
     )
 }
 

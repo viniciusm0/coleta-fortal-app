@@ -1,9 +1,6 @@
-import DrawerRoutes from "@/src/components/Routes/Drawer.routes";
-
+import { Slot } from 'expo-router';
 
 export default function RootLayout() {
-  return (
-    <DrawerRoutes />
-    
-  );
+  return <Slot />;
+
 }

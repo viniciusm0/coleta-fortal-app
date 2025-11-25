@@ -1,5 +1,5 @@
-import {useState, useEffect, useCallback} from "react";
 import * as Location from 'expo-location';
+import { useCallback, useEffect, useState } from "react";
 import { Region } from "react-native-maps";
 
 export default function useInitialLocation() {

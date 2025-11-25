@@ -1,21 +1,38 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function Configuracoes() {
+export default function Configuracoes(props: any) {
+  const setRadius = props.setRadiusFunction
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Raio de busca</Text>
 
       <View style={styles.optionsContainer}>
-        <Pressable style={styles.option}>
+        <Pressable style={styles.option}
+          onPress={() => {
+            setRadius(300)
+          }}
+        >
           <Text style={styles.optionText}>300m</Text>
         </Pressable>
-        <Pressable style={styles.option}>
+        <Pressable style={styles.option}
+          onPress={() => {
+            setRadius(500)
+          }}
+        >
           <Text style={styles.optionText}>500m</Text>
         </Pressable>
-        <Pressable style={styles.option}>
+        <Pressable style={styles.option}
+          onPress={() => {
+            setRadius(1000)
+          }} 
+        >
           <Text style={styles.optionText}>1 km</Text>
         </Pressable>
-        <Pressable style={styles.option}>
+        <Pressable style={styles.option}
+          onPress={() => {
+            setRadius(2000)
+          }} 
+        >
           <Text style={styles.optionText}>2 km</Text>
         </Pressable>
       </View>
